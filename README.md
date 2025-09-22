@@ -1,17 +1,3 @@
-# ALX Listing App
-
-## Description
-Creating an Airbnb clone listing page as part of the ALX project.
-
-## Project Structure
-- `components/`: Reusable components like Card and Button.
-- `interfaces/`: TypeScript interfaces for the project.
-- `constants/`: Reusable constants like API URLs.
-- `public/assets/`: Images and assets used in the project.
-
-## Running Locally
-1. Install dependencies: `npm install`
-2. Run development server: `npm run dev`
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
