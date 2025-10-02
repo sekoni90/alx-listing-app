@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ReactNode } from "react";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <main className="min-h-screen pt-24">{children}</main>
+      <Footer />
+    </>
+  );
+};
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

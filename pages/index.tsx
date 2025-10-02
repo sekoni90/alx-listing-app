@@ -1,6 +1,19 @@
 import React from "react";
 import Card from "@/components/common/Card";
 import { DEFAULT_IMAGE, APP_NAME, UI } from "@/constants";
+import HeroSection from "@/components/HeroSection";
+import FilterSection from "@/components/FilterSection";
+import ListingSection from "@/components/ListingSection";
+
+const HomePage: React.FC = () => {
+  return (
+    <>
+      <HeroSection />
+      <FilterSection />
+      <ListingSection />
+    </>
+  );
+};
 
 const Home: React.FC = () => {
   return (
@@ -16,7 +29,7 @@ const Home: React.FC = () => {
             title="Villa Ocean Breeze"
             description="A cozy villa near the beach — 3 beds, 2 baths."
             imageUrl={DEFAULT_IMAGE}
-            primaryLabel={UI.primaryAction}
+            primaryLabel={"UI.primaryAction"}
             onPrimaryClick={() => alert("Book Now clicked")}
           />
 
@@ -24,7 +37,7 @@ const Home: React.FC = () => {
             title="City Apartment"
             description="Central apartment with city view."
             imageUrl={DEFAULT_IMAGE}
-            primaryLabel={UI.detailsAction}
+            primaryLabel={"UI.detailsAction"}
             onPrimaryClick={() => alert("Details clicked")}
           />
 </section>
