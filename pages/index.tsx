@@ -1,49 +1,83 @@
-import React from "react";
-import Card from "@/components/common/Card";
-import { DEFAULT_IMAGE, APP_NAME, UI } from "@/constants";
-import HeroSection from "@/components/HeroSection";
-import FilterSection from "@/components/FilterSection";
-import ListingSection from "@/components/ListingSection";
+// pages/index.tsx
+import React, { useState } from "react";
+import { PROPERTYLISTINGSAMPLE, HERO_IMAGE } from "../constants";
+import Pill from "../components/Pill";
+import PropertyCard from "../components/PropertyCard";
+
+const FILTERS = [
+  "Top Villa",
+  "Self Checkin",
+  "Pool",
+  "Pet Friendly",
+  "Beachfront",
+  "Mountain View",
+  "Free WiFi",
+];
 
 const HomePage: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
+  const filtered = activeFilter
+    ? PROPERTYLISTINGSAMPLE.filter((p) =>
+        p.category.some((c) => c.toLowerCase().includes(activeFilter.toLowerCase()))
+      )
+    : PROPERTYLISTINGSAMPLE;
+
   return (
-    <>
-      <HeroSection />
-      <FilterSection />
-      <ListingSection />
-    </>
-  );
-};
-
-const Home: React.FC = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <main className="max-w-5xl w-full">
-        <header className="mb-6">
-          <h1 className="text-3xl font-bold">{APP_NAME}</h1>
-          <p className="text-sm text-gray-600">A simple listing page demo</p>
-        </header>
-
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card
-            title="Villa Ocean Breeze"
-            description="A cozy villa near the beach — 3 beds, 2 baths."
-            imageUrl={DEFAULT_IMAGE}
-            primaryLabel={"UI.primaryAction"}
-            onPrimaryClick={() => alert("Book Now clicked")}
+    <div>
+      {/* HERO */}
+      <section className="relative h-64 md:h-96 flex items-center overflow-hidden">
+        {/* Background image as an absolutely-positioned <img> (no inline styles) */}
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={HERO_IMAGE}
+            alt="Hero background"
+            className="w-full h-full object-cover"
+            loading="lazy"
           />
+        </div>
 
-          <Card
-            title="City Apartment"
-            description="Central apartment with city view."
-            imageUrl={DEFAULT_IMAGE}
-            primaryLabel={"UI.detailsAction"}
-            onPrimaryClick={() => alert("Details clicked")}
-          />
-</section>
-      </main>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/40 -z-0" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+          <h1 className="text-2xl md:text-4xl font-bold">Find your favorite place here!</h1>
+          <p className="mt-2 text-sm md:text-lg">
+            The best prices for over 2 million properties worldwide.
+          </p>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {FILTERS.map((f) => (
+              <Pill
+                key={f}
+                label={f}
+                active={activeFilter === f}
+                onClick={(label) => setActiveFilter((prev) => (prev === label ? null : label))}
+              />
+            ))}
+          </div>
+
+          <div className="text-sm text-gray-600">
+            Showing <strong>{filtered.length}</strong> properties
+          </div>
+        </div>
+      </section>
+
+      {/* Listing */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((p, idx) => (
+            <PropertyCard key={`${p.name}-${idx}`} property={p} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

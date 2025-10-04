@@ -1,19 +1,16 @@
-import React, { ReactNode } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+// components/layout/Layout.tsx
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-24">{children}</main>
+      <main className="min-h-screen bg-white">{children}</main>
       <Footer />
     </>
   );
 };
 
-export default Layout;
+export default Layout;

@@ -15,21 +15,19 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
-// Add more interfaces below as the project grows
-// interfaces/index.js
-interface Address {
+export interface Address {
   state: string;
   city: string;
   country: string;
 }
 
-interface Offers {
+export interface Offers {
   bed: string;
   shower: string;
   occupants: string;
 }
 
-interface PropertyProps {
+export interface PropertyProps {
   name: string;
   address: Address;
   rating: number;
@@ -37,7 +35,5 @@ interface PropertyProps {
   price: number;
   offers: Offers;
   image: string;
-  discount: string;
+  discount: string; // percentage as string or empty
 }
-
-export default PropertyProps;
